@@ -1,9 +1,15 @@
 terraform {
   required_providers {
-    azurerm = { source = "hashicorp/azurerm", version = "~> 3.0" }
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.0"
+    }
   }
 }
-provider "azurerm" { features {} }
+
+provider "azurerm" {
+  features {}
+}
 
 resource "azurerm_resource_group" "rg" {
   name     = "RG-Observability-Lab"
@@ -21,5 +27,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
     node_count = 1
     vm_size    = "Standard_D2s_v3"
   }
-  identity { type = "SystemAssigned" }
+
+  identity {
+    type = "SystemAssigned"
+  }
 }
