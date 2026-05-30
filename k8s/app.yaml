@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpu-burner-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: burner
+  template:
+    metadata:
+      labels:
+        app: burner
+    spec:
+      containers:
+      - name: python-app
+        # Gotowy publiczny obraz z aplikacją generującą obciążenie matematyczne (Flask)
+        image: ghcr.io/mieszkomerito/cpu-burner:latest 
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: "100m"
+          limits:
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: burner-service
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: burner
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: burner-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cpu-burner-app
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
