@@ -5,6 +5,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write   # TO JEST KRYTYCZNE DLA OIDC (Bezhasłowe logowanie)
 
 jobs:
   Deploy_Infrastructure_and_Monitoring:
@@ -12,10 +13,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Zalogowanie do Azure
+      - name: Zalogowanie do Azure (OIDC)
         uses: azure/login@v2
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Inicjalizacja i budowa Terraform
         working-directory: ./terraform
