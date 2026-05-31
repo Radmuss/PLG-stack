@@ -13,7 +13,7 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "rg" {
   name     = "RG-Observability-Lab"
-  location = "westeurope"
+  location = "polandcentral"
 }
 
 resource "azurerm_kubernetes_cluster" "aks" {
