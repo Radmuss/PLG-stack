@@ -17,15 +17,15 @@ Wykorzystamy do tego najpopularniejsze na rynku narzędzia:
 Aby rozpocząć pracę, musicie pobrać kod z mojego repozytorium i uruchomić infrastrukturę w chmurze. 
 
 ### Zadanie 0.1: Klonowanie repozytorium i logowanie
-1. Klonowanie repozytorium, np. za pomocą GitHub Desktop - tak jak na ostantich zajęich. 
+1. Klonowanie repozytorium, np. za pomocą GitHub Desktop - tak jak na ostatnich zajęciach. 
 
 ### Zadanie 0.2: Uruchomienie infrastruktury (CI/CD)
 1. Przejdźcie na stronę repozytorium GitHub w przeglądarce.
-2. Użyj kodu z osatatnic zajęć! Skonfigurujcie dostęp do chmury Azure. W ustawieniach repozytorium (**Settings -> Secrets and variables -> Actions**) dodajcie trzy sekrety (wartości poda prowadzący):
+2. Użyjcie kodu z ostatnich zajęć! Skonfigurujcie dostęp do chmury Azure. W ustawieniach repozytorium (**Settings -> Secrets and variables -> Actions**) dodajcie trzy sekrety (wartości poda prowadzący):
    * `AZURE_CLIENT_ID`
    * `TENANT_ID`
    * `SUBSCRIPTION_ID`
-3. Przejdźcie do zakładki **Actions** na GitHubie, wybierzcie potok wdrażający infrastrukturę (np. *Deploy AKS*) i uruchomcie go przyciskiem **Run workflow**. Proces ten potrwa kilka minut.
+3. Przejdźcie do zakładki **Actions** na GitHubie, wybierzcie potok wdrażający infrastrukturę i wstępny monitoring (np. *Deploy AKS*) i uruchomcie go przyciskiem **Run workflow**. Proces ten potrwa kilka minut. Ten krok automatycznie zainstaluje Prometheusa oraz Grafanę na Waszym klastrze.
 
 ### Zadanie 0.3: Podłączenie terminala do Klastra
 Gdy akcja na GitHubie zaświeci się na zielono, wróćcie do terminala Azure Cloud Shell i połączcie się z nowym klastrem:
